@@ -1,0 +1,27 @@
+# Exclude dependency directories
+/venv/
+/env/
+/node_modules/
+/lib/
+/libs/
+/packages/
+/Scripts/
+
+# Exclude dependency files
+package-lock.json
+yarn.lock
+Pipfile.lock
+
+
+.idea/\
+pyvenv.cfg
+
+.idea/
+**/.idea/
+
+
+
+
+pyvenv.cfg
+Lib/
+Scripts/
