@@ -2,11 +2,11 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     return render_template('coming_soon.html')
-    print(html_code)  # Print the HTML code in the console
+
+
 @app.route('/new')
 def new():
     return  render_template('new.html')
