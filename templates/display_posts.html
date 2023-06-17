@@ -1,0 +1,71 @@
+<!--------------------------------------
+MAIN
+--------------------------------------->
+<div class="container pt-4 pb-4">
+    <div class="row">
+        {% for row in data %}
+        {% if loop.first %}
+        <div class="col-lg-6">
+            <div class="card border-0 mb-4 box-shadow h-xl-300">
+                <div style="background-image: url('./static/img/demo/{{ row.thumbnail }}'); height: 150px;    background-size: cover;    background-repeat: no-repeat;"></div>
+                <div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
+                    <h2 class="h4 font-weight-bold">
+                        <a class="text-dark" href="./article.html">{{ row.title }}</a>
+                    </h2>
+                    <p class="card-text">
+                        {{ row.content }}
+                    </p>
+                    <div>
+                        <small class="d-block"><a class="text-muted" href="./author.html">{{ row.author }}</a></small>
+                        <small class="text-muted">{{ row.date }} &middot; {{ row.reading_time }} min read</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            {% else %}
+            <div class="flex-md-row mb-4 box-shadow h-xl-300">
+                <div class="mb-3 d-flex align-items-center">
+                    <img height="80" src="./static/img/demo/{{ row.thumbnail }}">
+                    <div class="pl-3">
+                        <h2 class="mb-2 h6 font-weight-bold">
+                            <a class="text-dark" href="./article.html">{{ row.title }}</a>
+                        </h2>
+                        <div class="card-text text-muted small">
+                            Jake Bittle in LOVE/HATE
+                        </div>
+                        <small class="text-muted">{{ row.date }} &middot; {{ row.reading_time }} min read</small>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <div class="mb-3 d-flex align-items-center">
+                    <img height="80" src="./static/img/demo/blog5.jpg">
+                    <div class="pl-3">
+                        <h2 class="mb-2 h6 font-weight-bold">
+                            <a class="text-dark" href="./article.html">Underwater museum brings hope to Lake
+                                Titicaca</a>
+                        </h2>
+                        <div class="card-text text-muted small">
+                            Jake Bittle in LOVE/HATE
+                        </div>
+                        <small class="text-muted">Dec 12 &middot; 5 min read</small>
+                    </div>
+                </div>
+
+                <div class="mb-3 d-flex align-items-center">
+                    <img height="80" src="./static/img/demo/blog6.jpg">
+                    <div class="pl-3">
+                        <h2 class="mb-2 h6 font-weight-bold">
+                            <a class="text-dark" href="./article.html">Sun-skimming probe starts calling home</a>
+                        </h2>
+                        <div class="card-text text-muted small">
+                            Jake Bittle in LOVE/HATE
+                        </div>
+                        <small class="text-muted">Dec 12 &middot; 5 min read</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
