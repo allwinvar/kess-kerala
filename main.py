@@ -24,6 +24,7 @@ class User(db.Model):
     reading_time = db.Column(db.String(10))
     thumbnail_image = db.Column(db.String(100))
     detailed_article = db.Column(db.Text)
+    article_url = db.Column(db.String(100))
 
 @app.route('/')
 def index():
