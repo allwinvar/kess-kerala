@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
+from datetime import date
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../articles.db'
@@ -41,9 +42,13 @@ def postsmith():
         title = request.form.get('title')
         content = request.form.get('content')
         author = request.form.get('author')
-        published_date = request.form.get('published_date')
-        reading_time = request.form.get('reading_time')
+        published_date = date.today()
         detailed_article = request.form.get('detailed_article')
+
+        # Calculate reading time based on the number of words
+        words = detailed_article.split()
+        num_words = len(words)
+        reading_time = num_words / 200  # Assuming an average reading speed of 200 words per minute
         #thumbnail = request.files['photo']
         print("yes, it exits")
         thumbnail_image = None
