@@ -1,12 +1,15 @@
 from data_fetcher import fetch_data_from_db
-from flask import Flask, render_template
+import data_put
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../articles.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+app.config['UPLOAD_FOLDER'] = './static/uploads'
 
 class User(db.Model):
     __tablename__ = 'posts'
@@ -31,6 +34,30 @@ def index():
 @app.route('/new')
 def new():
     return  render_template('new.html')
+
+@app.route('/postsmith', methods=['GET', 'POST'])
+def postsmith():
+    if request.method == 'POST' and 'thumbnail_image' in request.files:
+        title = request.form.get('title')
+        content = request.form.get('content')
+        author = request.form.get('author')
+        published_date = request.form.get('published_date')
+        reading_time = request.form.get('reading_time')
+        detailed_article = request.form.get('detailed_article')
+        #thumbnail = request.files['photo']
+        print("yes, it exits")
+        thumbnail_image = None
+        if 'thumbnail_image' in request.files:
+
+            file = request.files['thumbnail_image']
+            if file.filename != '':
+                filename = file.filename
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        data_put.insert_post(title, content, author, published_date, reading_time,filename, detailed_article)
+        return redirect('/')
+    return render_template('postsmith.html')
 
 
 if __name__ == '__main__':

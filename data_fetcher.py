@@ -14,7 +14,7 @@ def fetch_data_from_db():
 
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM posts ')
+    cursor.execute('SELECT * FROM posts ORDER BY id DESC LIMIT 4')
 
     # Iterate over the results and create a list of dictionaries.
     data = [
