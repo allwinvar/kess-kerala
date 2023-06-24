@@ -3,6 +3,8 @@ import data_put
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 import os
 from datetime import date
 
@@ -10,8 +12,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../articles.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-app.config['UPLOAD_FOLDER'] = './static/uploads'
-
 class User(db.Model):
     __tablename__ = 'posts'
 
@@ -24,6 +24,10 @@ class User(db.Model):
     thumbnail_image = db.Column(db.String(100))
     detailed_article = db.Column(db.Text)
     article_url = db.Column(db.String(100))
+
+admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
+admin.add_view(ModelView(User, db.session))
+
 
 @app.route('/')
 def index():
@@ -57,8 +61,8 @@ def postsmith():
             file = request.files['thumbnail_image']
             if file.filename != '':
                 filename = file.filename
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                file.save(os.path.join(app.static_folder, 'uploads', filename))
+
 
         data_put.insert_post(title, content, author, published_date, reading_time,filename, detailed_article)
         return redirect('/')
