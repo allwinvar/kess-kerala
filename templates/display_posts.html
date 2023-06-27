@@ -10,13 +10,13 @@ MAIN
                 <div style="background-image: url('{{url_for('static', filename='uploads/' + row.thumbnail )}}'); height: 150px;    background-size: cover;    background-repeat: no-repeat;"></div>
                 <div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
                     <h2 class="h4 font-weight-bold">
-                        <a class="text-dark" href="./article.html">{{ row.title }}</a>
+                        <a class="text-dark" href="{{ url_for('article', url=row.article_url) }}">{{ row.title }}</a>
                     </h2>
                     <p class="card-text">
                         {{ row.content }}
                     </p>
                     <div>
-                        <small class="d-block"><a class="text-muted" href="./author.html">{{ row.author }}</a></small>
+                        <small class="d-block"><a class="text-muted" href="{{row.article_url}}">{{ row.author }}</a></small>
                         <small class="text-muted">{{ row.date }} &middot; {{ row.reading_time }} min read</small>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ MAIN
                     <img height="80" src="{{ url_for('static', filename='uploads/' + row.thumbnail) }}">
                     <div class="pl-3">
                         <h2 class="mb-2 h6 font-weight-bold">
-                            <a class="text-dark" href="./article.html">{{ row.title }}</a>
+                            <a class="text-dark" href="{{ url_for('article', url=row.article_url) }}">{{ row.title }}</a>
                         </h2>
                         <div class="card-text text-muted small">
                             {{ row.author }}
@@ -39,32 +39,6 @@ MAIN
                 </div>
                 {% endif %}
                 {% endfor %}
-                <div class="mb-3 d-flex align-items-center">
-                    <img height="80" src="./static/img/demo/blog5.jpg">
-                    <div class="pl-3">
-                        <h2 class="mb-2 h6 font-weight-bold">
-                            <a class="text-dark" href="./article.html">Underwater museum brings hope to Lake
-                                Titicaca</a>
-                        </h2>
-                        <div class="card-text text-muted small">
-                            Jake Bittle in LOVE/HATE
-                        </div>
-                        <small class="text-muted">Dec 12 &middot; 5 min read</small>
-                    </div>
-                </div>
-
-                <div class="mb-3 d-flex align-items-center">
-                    <img height="80" src="./static/img/demo/blog6.jpg">
-                    <div class="pl-3">
-                        <h2 class="mb-2 h6 font-weight-bold">
-                            <a class="text-dark" href="./article.html">Sun-skimming probe starts calling home</a>
-                        </h2>
-                        <div class="card-text text-muted small">
-                            Jake Bittle in LOVE/HATE
-                        </div>
-                        <small class="text-muted">Dec 12 &middot; 5 min read</small>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

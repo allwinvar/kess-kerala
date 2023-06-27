@@ -1,6 +1,6 @@
 import sqlite3
 from os import path
-def insert_post(title, content, author, published_date, reading_time, thumbnail_image, detailed_article):
+def insert_post(title, content, author, published_date, reading_time, thumbnail_image, detailed_article,article_url):
     # Get the directory of the current script
     current_dir = path.dirname(path.abspath(__file__))
 
@@ -13,9 +13,9 @@ def insert_post(title, content, author, published_date, reading_time, thumbnail_
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO posts (title, content, author, published_date, reading_time, thumbnail_image, detailed_article) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?)",
-        (title, content, author, published_date, reading_time, thumbnail_image, detailed_article))
+        "INSERT INTO posts (title, content, author, published_date, reading_time, thumbnail_image, detailed_article, article_url) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        (title, content, author, published_date, reading_time, thumbnail_image, detailed_article, article_url))
 
     conn.commit()
     conn.close()
